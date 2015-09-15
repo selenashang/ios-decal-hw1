@@ -15,39 +15,37 @@ class Foo {
     var wordB : String!
     
     init (words: [String?]) {
-        wordA = words[0]?
-        wordB = words[1]?
+        wordA = words[0]
+        wordB = words[1]
+    
+    
     }
-    
-//: [EXPLAIN YOUR ANSWER TO Q1 HERE]
-    
-
+//: In the input for init, words is already specified to be an optional, so we don't have to say that wordA and wordB are optionals, since they are going to take on the value of the 0th and 1st index of words. Side note: we declared wordA and wordB using an "!", wordA and wordB are implicitly unwrapped. The "!" gives the variable a value if it exists and a runtime error if it is nil and makes it known that there will always be a value for wordA and wordB.
     
 //: ## Q2: Variable Types and Function Types
 //: Why does the compiler dislike the for loop? Also, what should we return?
     
-    func arePalindromes(words: [String]) -> Bool! {
+    class func arePalindromes(words: [String]) -> Bool! {
         let reversedWords = words.map() {String($0.characters.reverse())}
-        var numElements = words.count
+        let numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        for var i = 0; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
         
-        return nil
+        return true
     }
-    
-//: [EXPLAIN YOUR ANSWER TO Q2 HERE]
-    
+
+//:"let" should be "var" because var allows the value to be changed. We should return a boolean not nil.
     
     
 //: ## Q3: More functions, and object initialization
 //: The method should be returning true or false -- what's wrong?
 //: Are we initializing the dictionary correctly?
-    func isAnagram(wordA: String, wordB: String) -> Bool? {
-        var countLetters : [Character : Int]
+    class func isAnagram(wordA: String, wordB: String) -> Bool? {
+        var countLetters = [Character : Int]()
         var lenA = wordA.characters.count
         var lenB = wordB.characters.count
         
@@ -56,6 +54,7 @@ class Foo {
         }
         var arrA = Array(wordA.characters)
         var arrB = Array(wordB.characters)
+
         
         for i in 0...lenA-1 {
             let letter = arrA[i]
@@ -81,12 +80,12 @@ class Foo {
             }
         }
         
+        
         return nil
     }
 }
 
-//: [EXPLAIN YOUR ANSWER TO Q3 HERE]
-
+//: I added the word "class" in front of the word "func" so that the functions would be attributed to the Foo class. Also, the dictionary's initialization statement had the wrong syntax. Change the ":" to the "=" and add parentheses at the end.
 
 //: **Do not** change anything below.
 //: You should be able to call the methods as is.
